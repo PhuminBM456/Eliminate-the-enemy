@@ -1,6 +1,7 @@
 class Drone extends Object{
     // field
     boolean move = false;
+    //int hp;
 
     // constructor
     Drone(int x,int y,int width,int height,int speed){
@@ -9,6 +10,7 @@ class Drone extends Object{
         this.width = width;
         this.height = height;
         this.speed = speed;
+        //hp = 100;
     }
 
     // method
