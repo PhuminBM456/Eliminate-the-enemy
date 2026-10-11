@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93f1dfdd-7e8f-432a-a1ac-ec092a908d5c" name="Changes" comment="Carrrr">
-      <change beforePath="$PROJECT_DIR$/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Game.java" afterDir="false" />
-    </list>
+    <list default="true" id="93f1dfdd-7e8f-432a-a1ac-ec092a908d5c" name="Changes" comment="Carrrr" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +94,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -112,8 +122,9 @@
     <MESSAGE value="UwU" />
     <MESSAGE value="Stream UwU" />
     <MESSAGE value="Drone" />
+    <MESSAGE value="Update all files" />
     <MESSAGE value="Carrrr" />
-    <option name="LAST_COMMIT_MESSAGE" value="Carrrr" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
