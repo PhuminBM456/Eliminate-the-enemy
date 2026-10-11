@@ -23,6 +23,9 @@ class Panel extends JPanel{
     Image state2 =  loadImage(location + "State2.jpg");
     Image car = loadImage(location + "Car.png");
     Image drone = loadImage(location + "Drone.png");
+    Image watch1 = loadImage(location + "Watch1.png");
+    Image watch2 = loadImage(location + "Watch2.png");
+    Image alien = loadImage(location + "alien.png");
 
     boolean gameOver = false;
     boolean openDimen = false;
@@ -130,7 +133,7 @@ class Panel extends JPanel{
             Capsem();
             checkPlayerATK();
             checkEnemyATK();
-            enmBot(); // <-- enemy bot switch
+            //enmBot(); // <-- enemy bot switch
             isDone();
             Fire();
 
@@ -587,6 +590,10 @@ class Panel extends JPanel{
                 }
             }
         }
+
+        // Hero Watch
+        g.drawImage(watch1,0,300,300,300,this);
+        g.drawImage(alien,-10,210,300,300,this);
 
         if(gameOver){
             g.setColor(Color.RED);
