@@ -2,17 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
-class Ultraman{
+class Inazuma{
     // field
     int completed = 0;
-
     boolean henshin = false;
-
     String location = "images/";
-
     Image Curr = null;
-    Image ultraman = loadImage(location + "Ultraman.png");
-    Image change = loadImage(location + "UltramanChange.png");
+    Image inazuma = loadImage(location + "Inazuma.png");
+    Image InazumaWebL = loadImage(location + "InazumaWebL.png");
+    Image InazumaWebR = loadImage(location + "InazumaWebR.png");
+    Image change = loadImage(location + "Change.png");
 
     // method
     Image loadImage(String path){

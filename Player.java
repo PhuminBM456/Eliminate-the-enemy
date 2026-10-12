@@ -1,9 +1,17 @@
+import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
+
 class Player extends Person{
     // field
+    String location = "images/";
     final int maxWeb = 20;
     int web = 20;
     boolean takeDamage = false;
     boolean stream = false;
+    Image normal =  loadImage(location + "Main.png");
+    Image left =  loadImage(location + "WebL.png");
+    Image right =  loadImage(location + "WebR.png");
 
     // constructor
     Player(){
@@ -12,6 +20,13 @@ class Player extends Person{
     }
 
     // method
+    Image loadImage(String path){
+        URL url = getClass().getResource(path);
+        Image img = new ImageIcon(url).getImage();
+
+        return  img;
+    }
+
     @Override
     void Attack(){
         if(web == 0)

@@ -11,10 +11,12 @@ class Panel extends JPanel{
 
     String powerSelected = null;
     String location = "images/";
+
     Image curr = null;
-    Image normal = loadImage(location + "Main.png");
-    Image left = loadImage(location + "WebL.png");
-    Image right = loadImage(location + "WebR.png");
+    Image normal = null;
+    Image left = null;
+    Image right = null;
+
     Image iconRecovery =  loadImage(location + "Power0.png");
     Image iconImpact =  loadImage(location + "Power1.png");
     Image iconStream =  loadImage(location + "Power2.png");
@@ -24,7 +26,6 @@ class Panel extends JPanel{
     Image car = loadImage(location + "Car.png");
     Image drone = loadImage(location + "Drone.png");
     Image effect = null;
-    
 
     boolean gameOver = false;
     boolean openDimen = false;
@@ -43,7 +44,7 @@ class Panel extends JPanel{
     Queue capsem = new Queue();
     HashTable ht = new HashTable();
     Missile missile = new Missile(5);
-    Ultraman ultraman = new Ultraman();
+    Inazuma inazuma = new Inazuma();
 
     // constructor
     Panel(){
@@ -66,9 +67,13 @@ class Panel extends JPanel{
                         player.Attack();
                     }else if(e.getKeyCode() == KeyEvent.VK_UP){
                         Jump();
-                    }else if(e.getKeyCode() == KeyEvent.VK_H){
-                        ultraman.henshin = true;
-                    }else if(e.getKeyCode() == KeyEvent.VK_B){
+                    }
+                    
+                    else if(e.getKeyCode() == KeyEvent.VK_H){
+                        inazuma.henshin = true;
+                    }
+                    
+                    else if(e.getKeyCode() == KeyEvent.VK_B){
                         if(openDimen == false){
                             openDimen = true;
                             return;
@@ -114,8 +119,9 @@ class Panel extends JPanel{
         });
 
         Timer timer = new Timer(10,e-> {
-            // test
-            if(player.hp < 100){player.hp += (100 - player.hp);}
+            Tranform();
+        
+            //if(player.hp < 100){player.hp += (100 - player.hp);}
 
             // polymorphism
             if(player.level == 2){
@@ -129,7 +135,7 @@ class Panel extends JPanel{
             Capsem();
             checkPlayerATK();
             checkEnemyATK();
-            //enmBot(); // <-- enemy bot switch
+            enmBot();
             isDone();
             Fire();
 
@@ -142,16 +148,7 @@ class Panel extends JPanel{
             if(player.jump == true)
                 player.Jump();
 
-
-            if(ultraman.henshin == true){
-                if(ultraman.completed != 250){
-                    curr = ultraman.change;
-                    ultraman.completed += 1;
-                }else{
-                    curr = ultraman.ultraman;
-                }
-            }
-
+            inazuma();
 
             if(layout){
                 if(lastKey != null && lastKey == '1'){
@@ -189,6 +186,18 @@ class Panel extends JPanel{
         return  img;
     }
 
+    void Tranform(){
+        if(!inazuma.henshin){
+            normal = player.normal;
+            left = player.left;
+            right = player.right;
+        }else{
+            normal = inazuma.inazuma;
+            left = inazuma.InazumaWebL;
+            right = inazuma.InazumaWebR;
+        }
+    }
+
     void getItem(){
 
         if(frameSelected >= 1 && frameSelected <= 9 && powerSelected != null){
@@ -218,6 +227,20 @@ class Panel extends JPanel{
                 ht.Delete("Stream");
 
                 return;
+            }
+        }
+    }
+
+    void inazuma(){
+        if(player.hp < 50){
+            inazuma.henshin = false;
+            curr = normal;
+        }
+
+        if(inazuma.henshin == true){
+            if(inazuma.completed != 250){
+                curr = inazuma.change;
+                inazuma.completed += 1;
             }
         }
     }
@@ -373,7 +396,7 @@ class Panel extends JPanel{
 
     void isDone(){
         if(enemy.done){
-            enemy.hp -= player.damage;
+            enemy.hp -= player.damage*2;
 
             if(enemy.hp <= 0){
 
@@ -427,7 +450,12 @@ class Panel extends JPanel{
             if(bullet.isTimeOut()){
                 bullets.remove(i);
             }else{
-                g.setColor(Color.RED);
+                if(inazuma.henshin){
+                    g.setColor(new Color(242, 255, 82));
+                }else{
+                    g.setColor(Color.RED);
+                }
+                
                 g.fillRect(bullet.x,bullet.y,10,10);
 
                 // hitbox bullet
@@ -453,11 +481,11 @@ class Panel extends JPanel{
         }
 
         // henshin
-        if(ultraman.henshin && ultraman.completed != 250){
+        if(inazuma.henshin && inazuma.completed != 250){
             if(idxHenshin > 16)
                 idxHenshin = 1;
 
-            Image effect = loadImage(location + "glitter"+(int)idxHenshin+".png");
+            Image effect = loadImage(location + "effects/glitter" +(int)idxHenshin+".png");
 
             g.drawImage(effect,player.x-27,player.y+40,100,100,this);
 
