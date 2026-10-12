@@ -7,10 +7,10 @@ import java.util.Vector;
 class Panel extends JPanel{
     // field
     int frameSelected = 0;
+    double idxHenshin = 1;
+
     String powerSelected = null;
-
     String location = "images/";
-
     Image curr = null;
     Image normal = loadImage(location + "Main.png");
     Image left = loadImage(location + "WebL.png");
@@ -23,6 +23,8 @@ class Panel extends JPanel{
     Image state2 =  loadImage(location + "State2.jpg");
     Image car = loadImage(location + "Car.png");
     Image drone = loadImage(location + "Drone.png");
+    Image effect = null;
+    
 
     boolean gameOver = false;
     boolean openDimen = false;
@@ -41,6 +43,7 @@ class Panel extends JPanel{
     Queue capsem = new Queue();
     HashTable ht = new HashTable();
     Missile missile = new Missile(5);
+    Ultraman ultraman = new Ultraman();
 
     // constructor
     Panel(){
@@ -63,6 +66,8 @@ class Panel extends JPanel{
                         player.Attack();
                     }else if(e.getKeyCode() == KeyEvent.VK_UP){
                         Jump();
+                    }else if(e.getKeyCode() == KeyEvent.VK_H){
+                        ultraman.henshin = true;
                     }else if(e.getKeyCode() == KeyEvent.VK_B){
                         if(openDimen == false){
                             openDimen = true;
@@ -121,11 +126,10 @@ class Panel extends JPanel{
                     obj2.move();
             }
 
-
             Capsem();
             checkPlayerATK();
             checkEnemyATK();
-            enmBot(); // <-- enemy bot switch
+            //enmBot(); // <-- enemy bot switch
             isDone();
             Fire();
 
@@ -137,6 +141,17 @@ class Panel extends JPanel{
 
             if(player.jump == true)
                 player.Jump();
+
+
+            if(ultraman.henshin == true){
+                if(ultraman.completed != 250){
+                    curr = ultraman.change;
+                    ultraman.completed += 1;
+                }else{
+                    curr = ultraman.ultraman;
+                }
+            }
+
 
             if(layout){
                 if(lastKey != null && lastKey == '1'){
@@ -437,9 +452,21 @@ class Panel extends JPanel{
             g.fillRect(enemy.bullet.x,enemy.bullet.y,10,10);
         }
 
+        // henshin
+        if(ultraman.henshin && ultraman.completed != 250){
+            if(idxHenshin > 12)
+                idxHenshin = 1;
+
+            Image effect = loadImage(location + "effect"+(int)idxHenshin+".png");
+
+            g.drawImage(effect,player.x-27,player.y+40,100,100,this);
+
+            idxHenshin+=0.5;
+        }
 
         // player & enemy
         g.drawImage(curr,player.x,player.y,player.size,player.size,this);
+        
         g.drawImage(enemy.enemy,enemy.x,enemy.y,enemy.size,enemy.size,this);
 
 
