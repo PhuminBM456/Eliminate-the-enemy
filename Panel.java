@@ -454,10 +454,10 @@ class Panel extends JPanel{
 
         // henshin
         if(ultraman.henshin && ultraman.completed != 250){
-            if(idxHenshin > 12)
+            if(idxHenshin > 16)
                 idxHenshin = 1;
 
-            Image effect = loadImage(location + "effect"+(int)idxHenshin+".png");
+            Image effect = loadImage(location + "glitter"+(int)idxHenshin+".png");
 
             g.drawImage(effect,player.x-27,player.y+40,100,100,this);
 
