@@ -114,16 +114,11 @@ class Panel extends JPanel{
 
             // polymorphism
             if(player.level == 2){
-                if(!gameOver && player.level != player.maxLevel){
+                if(!gameOver && player.level != player.maxLevel)
                     obj1.move();
-                }
-            }
-
-
-            if(player.level >= 3){
-                if(!gameOver && player.level != player.maxLevel){
+            }if(player.level >= 3){
+                if(!gameOver && player.level != player.maxLevel)
                     obj2.move();
-                }
             }
 
 

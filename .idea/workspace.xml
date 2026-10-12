@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93f1dfdd-7e8f-432a-a1ac-ec092a908d5c" name="Changes" comment="">
+    <list default="true" id="93f1dfdd-7e8f-432a-a1ac-ec092a908d5c" name="Changes" comment="UwU">
       <change beforePath="$PROJECT_DIR$/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Panel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Alien.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Watch1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Watch2.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,12 +121,12 @@
     <MESSAGE value="add images." />
     <MESSAGE value="Capsem" />
     <MESSAGE value="Table" />
-    <MESSAGE value="UwU" />
     <MESSAGE value="Stream UwU" />
     <MESSAGE value="Drone" />
     <MESSAGE value="Update all files" />
     <MESSAGE value="Carrrr" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="UwU" />
+    <option name="LAST_COMMIT_MESSAGE" value="UwU" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
