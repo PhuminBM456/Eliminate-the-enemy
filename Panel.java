@@ -71,6 +71,7 @@ class Panel extends JPanel{
                     
                     else if(e.getKeyCode() == KeyEvent.VK_H){
                         inazuma.henshin = true;
+                        player.speed *= 10;
                     }
                     
                     else if(e.getKeyCode() == KeyEvent.VK_B){
@@ -135,7 +136,7 @@ class Panel extends JPanel{
             Capsem();
             checkPlayerATK();
             checkEnemyATK();
-            enmBot();
+            //enmBot();
             isDone();
             Fire();
 
@@ -232,8 +233,9 @@ class Panel extends JPanel{
     }
 
     void inazuma(){
-        if(player.hp < 50){
+        if(player.hp < 50 && inazuma.henshin){
             inazuma.henshin = false;
+            player.speed /= 10;
             curr = normal;
         }
 
