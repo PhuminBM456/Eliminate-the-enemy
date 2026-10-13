@@ -7,6 +7,7 @@ import java.util.Vector;
 class Panel extends JPanel{
     // field
     int frameSelected = 0;
+    int levelFake = 1;
     double idxHenshin = 1;
 
     String powerSelected = null;
@@ -20,7 +21,8 @@ class Panel extends JPanel{
     Image iconRecovery =  loadImage(location + "Power0.png");
     Image iconImpact =  loadImage(location + "Power1.png");
     Image iconStream =  loadImage(location + "Power2.png");
-    Image iconBlank =  loadImage(location + "Power3.png");
+    Image iconInazuma =  loadImage(location + "Power3.png");
+    Image iconBlank =  loadImage(location + "PowerBlank.png");
     Image state1 =  loadImage(location + "State1.jpg");
     Image state2 =  loadImage(location + "State2.jpg");
     Image car = loadImage(location + "Car.png");
@@ -37,7 +39,7 @@ class Panel extends JPanel{
     Enemy enemy = new Enemy();
 
     // polymorphism
-    Object obj1 = new Car(900,402,135,150,2);
+    Object obj1 = new Car(900,402,135,150,5);
     Object obj2 = new Drone(0,50,50,50,2);
 
     Vector<Bullet> bullets = new Vector<>();
@@ -67,14 +69,7 @@ class Panel extends JPanel{
                         player.Attack();
                     }else if(e.getKeyCode() == KeyEvent.VK_UP){
                         Jump();
-                    }
-                    
-                    else if(e.getKeyCode() == KeyEvent.VK_H){
-                        inazuma.henshin = true;
-                        player.speed *= 10;
-                    }
-                    
-                    else if(e.getKeyCode() == KeyEvent.VK_B){
+                    }else if(e.getKeyCode() == KeyEvent.VK_B){
                         if(openDimen == false){
                             openDimen = true;
                             return;
@@ -120,58 +115,20 @@ class Panel extends JPanel{
         });
 
         Timer timer = new Timer(10,e-> {
+            resetLevel();
             Tranform();
-        
-            //if(player.hp < 100){player.hp += (100 - player.hp);}
-
-            // polymorphism
-            if(player.level == 2){
-                if(!gameOver && player.level != player.maxLevel)
-                    obj1.move();
-            }if(player.level >= 3){
-                if(!gameOver && player.level != player.maxLevel)
-                    obj2.move();
-            }
-
+            //Test();
+            OBJ();
             Capsem();
             checkPlayerATK();
             checkEnemyATK();
             //enmBot();
             isDone();
             Fire();
-
-            if(player.playerDead())
-                gameOver = true;
-
-            if(bullets.isEmpty())
-                curr = normal;
-
-            if(player.jump == true)
-                player.Jump();
-
+            Player();
+            Bullet();
             inazuma();
-
-            if(layout){
-                if(lastKey != null && lastKey == '1'){
-                    frameSelected = 1;
-                }else if(lastKey != null && lastKey == '2'){
-                    frameSelected = 2;
-                }else if(lastKey != null && lastKey == '3'){
-                    frameSelected = 3;
-                }else if(lastKey != null && lastKey == '4'){
-                    frameSelected = 4;
-                }else if(lastKey != null && lastKey == '5'){
-                    frameSelected = 5;
-                }else if(lastKey != null && lastKey == '6'){
-                    frameSelected = 6;
-                }else if(lastKey != null && lastKey == '7'){
-                    frameSelected = 7;
-                }else if(lastKey != null && lastKey == '8'){
-                    frameSelected = 8;
-                }else if(lastKey != null && lastKey == '9'){
-                    frameSelected = 9;
-                }
-            }
+            Layout();
 
             repaint();
         });
@@ -180,11 +137,67 @@ class Panel extends JPanel{
     }
 
     // method
+    void Test(){
+        if(player.hp < 100){player.hp += (100 - player.hp);}
+    }
+
     Image loadImage(String path){
         URL url = getClass().getResource(path);
         Image img = new ImageIcon(url).getImage();
 
         return  img;
+    }
+
+    void OBJ(){
+        if(player.level == 2){
+            if(!gameOver && player.level != player.maxLevel)
+                obj1.move();
+        }if(player.level >= 3){
+            if(!gameOver && player.level != player.maxLevel)
+                obj2.move();
+        }
+    }
+
+    void Player(){
+        if(player.playerDead())
+            gameOver = true;
+
+        if(player.jump == true)
+            player.Jump();
+    }
+
+    void Bullet(){
+        if(bullets.isEmpty())
+            curr = normal;
+    }
+
+    void Layout(){
+        if(layout){
+            if(lastKey != null && lastKey == '1'){
+                frameSelected = 1;
+            }else if(lastKey != null && lastKey == '2'){
+                frameSelected = 2;
+            }else if(lastKey != null && lastKey == '3'){
+                frameSelected = 3;
+            }else if(lastKey != null && lastKey == '4'){
+                frameSelected = 4;
+            }else if(lastKey != null && lastKey == '5'){
+                frameSelected = 5;
+            }else if(lastKey != null && lastKey == '6'){
+                frameSelected = 6;
+            }else if(lastKey != null && lastKey == '7'){
+                frameSelected = 7;
+            }else if(lastKey != null && lastKey == '8'){
+                frameSelected = 8;
+            }else if(lastKey != null && lastKey == '9'){
+                frameSelected = 9;
+            }
+        }
+    }
+
+    void resetLevel(){
+        if(player.level == 4)
+            player.level = 1;
     }
 
     void Tranform(){
@@ -222,10 +235,25 @@ class Panel extends JPanel{
             }
 
             if(powerSelected == "Stream"){
+                if(player.stream)
+                    return;
+
                 player.stream = true;
                 player.jumpPower += 200;
 
                 ht.Delete("Stream");
+
+                return;
+            }
+
+            if(powerSelected == "Inazuma"){
+                if(inazuma.henshin)
+                    return;
+
+                inazuma.henshin = true;
+                player.speed *= 10;
+
+                ht.Delete("Inazuma");
 
                 return;
             }
@@ -410,8 +438,10 @@ class Panel extends JPanel{
                 player.speed += 1;
                 player.jumpPower += 5;
 
-                if(player.level != player.maxLevel)
+                if(player.level != player.maxLevel){
                     player.level += 1;
+                    levelFake += 1;
+                }
             }
 
             //System.out.println(enemy.hp);
@@ -442,8 +472,6 @@ class Panel extends JPanel{
         }else{
             g.drawImage(state2,0,0,900,580,this);
         }
-
-
 
         // bullet player
         for(int i=0;i<bullets.size();i++){
@@ -564,7 +592,7 @@ class Panel extends JPanel{
             g.setColor(Color.WHITE);
         }
         g.drawString("Web Shooter " + player.web + "/" + player.maxWeb,10,20);
-        g.drawString("Level " + player.level,10,50);
+        g.drawString("Level " + levelFake,10,50);
         g.drawString("Streght " + player.damage,10,80);
 
         g.drawImage(iconBlank,10,100,40,40,this); // pocket dimension
@@ -610,6 +638,8 @@ class Panel extends JPanel{
                             icon = iconImpact;
                         }else if(powerName == "Stream"){
                             icon = iconStream;
+                        }else if(powerName == "Inazuma"){
+                            icon = iconInazuma;
                         }
 
                         g.drawImage(icon,222+dX,118+dY,45,40,this);
@@ -643,9 +673,13 @@ class Panel extends JPanel{
         if(gameOver){
             g.setColor(Color.RED);
             g.drawString("MISSION FAILED",400,100);
-        }else if(player.level == player.maxLevel){
+        }
+
+        /*
+        else if(player.level == player.maxLevel){
             g.setColor(Color.GREEN);
             g.drawString("MISSION COMPLETED",400,100);
         }
+        */
     }
 }
