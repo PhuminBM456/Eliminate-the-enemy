@@ -252,6 +252,7 @@ class Panel extends JPanel{
 
                 inazuma.henshin = true;
                 player.speed *= 10;
+                player.hp += (100 - player.hp);
 
                 ht.Delete("Inazuma");
 
@@ -263,6 +264,7 @@ class Panel extends JPanel{
     void inazuma(){
         if(player.hp < 50 && inazuma.henshin){
             inazuma.henshin = false;
+            inazuma.completed = 0;
             player.speed /= 10;
             curr = normal;
         }
