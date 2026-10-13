@@ -609,13 +609,13 @@ class Panel extends JPanel{
         }
 
         if(layout){ // table
-            int idx,dX,dY,count;
+            int idx,dX,dY;
 
             idx = 1;
-            dY = count = 0;
 
             for(int j=1;j<=3;j++){
                 dX = 0;
+                dY = 100 * (j-1);
 
                 for(int i=1;i<=3;i++){
                     g.setColor(Color.GRAY);
@@ -647,9 +647,6 @@ class Panel extends JPanel{
                         g.setColor(Color.RED);
                         g.drawString("x"+ht.Search(ht.arr[idx-1].head.power),260+dX,165+dY);
 
-
-
-                        ++count;
                     }
 
                     if(frameSelected == idx && ht.arr[idx-1].head != null){
@@ -662,10 +659,6 @@ class Panel extends JPanel{
                     ++idx;
                     dX+=200;
 
-                }
-                if(count == 3){
-                    count = 0;
-                    dY+=100;
                 }
             }
         }
