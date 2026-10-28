@@ -122,7 +122,7 @@ class Panel extends JPanel{
             Capsem();
             checkPlayerATK();
             checkEnemyATK();
-            //enmBot();
+            enmBot();
             isDone();
             Fire();
             Player();
@@ -491,8 +491,8 @@ class Panel extends JPanel{
                 g.fillRect(bullet.x,bullet.y,10,10);
 
                 // hitbox bullet
-                g.setColor(Color.BLUE);
-                g.drawRect(bullet.x-3,bullet.y-3,15,15);
+                //g.setColor(Color.BLUE);
+                //g.drawRect(bullet.x-3,bullet.y-3,15,15);
 
                 // check collision
                 boolean done = bullet.isCollision(bullet.getHitBox(),enemy.getHitBox());
@@ -533,8 +533,8 @@ class Panel extends JPanel{
         // object
         if(player.level == 2){
             // hitbox object
-            g.setColor(Color.BLUE);
-            g.drawRect(obj1.x,obj1.y+75,obj1.width-9,obj1.height-80);
+            //g.setColor(Color.BLUE);
+            //g.drawRect(obj1.x,obj1.y+75,obj1.width-9,obj1.height-80);
 
             g.drawImage(car,obj1.x,obj1.y,obj1.width,obj1.height,this);
 
@@ -558,19 +558,20 @@ class Panel extends JPanel{
         }
 
         // hitbox person
-        g.setColor(Color.RED);
-        g.drawRect(player.x-7,player.y+50,65,100);
+        //g.setColor(Color.RED);
+        //g.drawRect(player.x-7,player.y+50,65,100);
 
-        g.setColor(Color.BLUE);
-        g.drawRect(enemy.x-7,enemy.y+50,65,100);
+        //g.setColor(Color.BLUE);
+        //g.drawRect(enemy.x-7,enemy.y+50,65,100);
 
         // capsem
         if(capsem.status){
             Capsem cap = capsem.arr[capsem.front];
             g.drawImage(cap.capsem,cap.x,cap.y,cap.size,cap.size,this);
 
-            g.setColor(Color.BLUE); // hitbox capsem
-            g.drawRect(cap.x,cap.y,17,20);
+            // hitbox capsem
+            //g.setColor(Color.BLUE);
+            //g.drawRect(cap.x,cap.y,17,20);
 
         }
 

@@ -9,7 +9,6 @@ class Bullet{
         this.x = x+d;
         this.y = y+112;
         this.speed = speed;
-        //System.out.println(x);
     }
 
     // method
